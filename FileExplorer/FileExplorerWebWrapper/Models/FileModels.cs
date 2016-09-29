@@ -29,6 +29,10 @@ namespace FileExplorerWebWrapper.Models
 					}
 					return result;
 				}
+				if (info == null)
+				{
+					return new List<object>();
+				}
 				if (Directory.Exists(info.FullName))
 				{
 					List<object> result = new List<object>();
@@ -88,6 +92,82 @@ namespace FileExplorerWebWrapper.Models
 			set
 			{
 				keyField = value;
+			}
+		}
+
+		public string Type
+		{
+			get
+			{
+				if (info == null && !path.Equals(""))
+				{
+					return "Unknown";
+				}
+				if (path.Equals(""))
+				{
+					return "Directory";
+				}
+				if (Directory.Exists(info.FullName))
+				{
+					return "Directory";
+				}
+				else if (File.Exists(info.FullName))
+				{
+					string result = "";
+
+					/*
+					 * check if the file is a binary or a text file
+					 * by judging if there exists a char(0) in the 
+					 * first 10mb data.
+					 */
+					StreamReader reader = null;
+					try
+					{
+						reader = new StreamReader(info.FullName);
+					}
+					catch (Exception e)
+					{
+						error = 1;
+						message = e.Message;
+					}
+					int maxLength = 10 * 1024 * 1024;
+					int currLength = 0;
+					while (!reader.EndOfStream)
+					{
+						int b = reader.Read();
+						++currLength;
+						if (b == 0)
+						{
+							return "Binary";
+						}
+						if (currLength >= maxLength)
+							break;
+					}
+					return "Text";
+				}
+				return "Unknown";
+			}
+		}
+
+		public string Name
+		{
+			get
+			{
+				if (info == null)
+					return "";
+				return info.Name;
+			}
+		}
+
+		public string Content
+		{
+			get
+			{
+				if (Type.Equals("Text"))
+				{
+					return new StreamReader(info.FullName).ReadToEnd();
+				}
+				return "";
 			}
 		}
 

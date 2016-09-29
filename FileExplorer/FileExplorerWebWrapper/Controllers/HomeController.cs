@@ -22,7 +22,7 @@ namespace FileExplorerWebWrapper.Controllers
 		{
 			return View();
 		}
-	
+
 		public ActionResult FileInfo()
 		{
 			string filePath = Request.Form["filePath"].ToString();
@@ -59,6 +59,7 @@ namespace FileExplorerWebWrapper.Controllers
                 return Content(htmlContent);
             }
 		}
+
 		private FileModel currFileModel = null;
 	}
 }

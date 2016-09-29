@@ -46,7 +46,8 @@ namespace FileExplorer
 				return;
 			if (!File.Exists(path) && !Directory.Exists(path))
 			{
-				throw new FileNotFoundException("File '" + path + "'does not exist.");
+				info = null;
+				return;
 			}
 			info = new FileInfo(path);
 			if (Directory.Exists(path))

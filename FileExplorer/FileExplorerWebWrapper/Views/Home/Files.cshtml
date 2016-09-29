@@ -32,6 +32,7 @@
             加载中…
         </div>
     </row>
+
     <script>
         function goToParent()
         {
@@ -79,9 +80,44 @@
                 },
                 "success": function (data) {
                     var json = JSON.parse(JSON.stringify(data));
-                    for (fileJson of json["FileList"])
+                    if (json["Error"] != 0)
                     {
-                        createFileNode(fileJson);
+                        alert("发生了错误：\n" + json["Message"]);
+                        return;
+                    }
+                    if (json["Type"] === "Directory") {
+                        for (fileJson of json["FileList"])
+                        {
+                            createFileNode(fileJson);
+                        }
+                        return;
+                    }
+
+                    var nodeFileTitle = document.createElement("h4");
+                    nodeFileTitle.style.color = "grey";
+                    nodeFileTitle.innerHTML = json["Name"];
+                    nodeFileList.appendChild(nodeFileTitle);
+                    nodeFileList.appendChild(document.createElement("hr"));
+
+                    if (json["Type"] === "Binary")
+                    {
+                        var nodePrompt = document.createElement("h5");
+                        nodePrompt.setAttribute("style", "color:grey");
+                        nodePrompt.innerHTML = "这是一个二进制文件...";
+                        nodeFileList.appendChild(nodePrompt);
+                    }
+                    else if (json["Type"] === "Text")
+                    {
+                        var nodePrompt = document.createElement("h5");
+                        nodePrompt.innerHTML = json["Content"].replace("\n", "&nbsp");
+                        nodeFileList.appendChild(nodePrompt);
+                    }
+                    else
+                    {
+                        var nodePrompt = document.createElement("h5");
+                        nodePrompt.setAttribute("style", "color:grey");
+                        nodePrompt.innerHTML = "不存在这个文件或者未知的文件类型...";
+                        nodeFileList.appendChild(nodePrompt);
                     }
                 }
             })
