@@ -129,6 +129,7 @@ namespace FileExplorerWebWrapper.Models
 					{
 						error = 1;
 						message = e.Message;
+						return "Unknown";
 					}
 					int maxLength = 10 * 1024 * 1024;
 					int currLength = 0;
