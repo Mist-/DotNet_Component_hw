@@ -1,0 +1,48 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 800px;
+}
+
+.hoverable:hover {
+    animation: div-hover 0.5s forwards;
+}
+.hoverable {
+    animation: div-hover-exit 0.5s forwards;
+    padding:8px;
+}
+
+.h6 {
+    color:#808080;
+    padding-right:3px;
+}
+
+@keyframes div-hover-exit {
+    from {
+        background-color:#e0e0e0;
+    }
+    to {
+        background-color:#ffffff;
+    }
+}
+
+@keyframes div-hover {
+    from {
+        background-color:#ffffff;
+    }
+    to {
+        background-color:#e0e0e0;
+    }
+}
