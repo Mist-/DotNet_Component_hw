@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<students xmlns="http://tempuri.org/Student.xsd">
+  <student>
+    <name>哈哈哈哈哈哈哈哈</name>
+    <age>20</age>
+    <gender>男</gender>
+    <stuId>141250115</stuId>
+    <major>
+      <department>软件学院</department>
+      <major>软件开发</major>
+    </major>
+  </student>
+</students>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Student"
+    targetNamespace="http://tempuri.org/Student.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Student.xsd"
+    xmlns:mstns="http://tempuri.org/Student.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:element name="students">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="student" minOccurs="0" type="studentType" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="studentType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="age" type="ageType" />
+      <xs:element name="gender" type="genderType" />
+      <xs:element name="stuId" type="stuIdType" />
+      <xs:element name="major" type="majorType" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:simpleType name="genderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="男" />
+      <xs:enumeration value="女" />
+      <xs:enumeration value="未知" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ageType">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1" />
+      <xs:maxInclusive value="120" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="stuIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([M][G]|[M][F])?[0-9]+" />
+    </xs:restriction> 
+  </xs:simpleType>
+
+  <xs:complexType name="majorType">
+    <xs:sequence>
+      <xs:element name="department">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="文学院" />
+            <xs:enumeration value="历史学院" />
+            <xs:enumeration value="法学院" />
+            <xs:enumeration value="哲学院" />
+            <xs:enumeration value="新闻传播学院" />
+            <xs:enumeration value="政府管理学院" />
+            <xs:enumeration value="软件学院" />
+            <xs:enumeration value="商学院" />
+            <!--意思意思够了吧 =。=-->
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="major" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
